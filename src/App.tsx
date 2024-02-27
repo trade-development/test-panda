@@ -25,7 +25,7 @@ function App() {
       const data = await axios.get(
         `https://abch.mithrandir.hu/hu/default/jsonapi/basket`,
         {
-          //withCredentials: true, // Include this if cookies are expected to be sent with the request
+          //withCredentials: true,
         },
       )
       setBasket(data)
