@@ -3,10 +3,12 @@ import axios from 'axios'
 
 function App() {
   const [basket, setBasket] = useState({})
+  const [token, setToken] = useState('')
 
   const addProduct = async () => {
     await axios.post(
-      `https://abch.mithrandir.hu/hu/default/jsonapi/basket?related=product`,
+      //  `https://abch.mithrandir.hu/hu/default/jsonapi/basket?id=default&related=product&_token=${token}`,
+      `https://abch.mithrandir.hu/hu/default/jsonapi/basket?related=product&_token=${token}`,
       {
         data: {
           attributes: {
@@ -29,6 +31,7 @@ function App() {
         },
       )
       setBasket(data)
+      setToken(data.data.meta.csrf.value)
     }
     fetchBasket()
   }, [])
@@ -39,6 +42,7 @@ function App() {
 
   return (
     <>
+      <p>Token: {token}</p>
       <button onClick={() => addProduct()}>order product:25</button>
       <pre>{JSON.stringify(basket, null, 2)}</pre>
     </>
